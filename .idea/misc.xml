@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_6" assert-keyword="true" jdk-15="true" project-jdk-name="1.7" project-jdk-type="JavaSDK">
-    <output url="file://$PROJECT_DIR$/out" />
-  </component>
+  <component 
+  project-jdk-type="JavaSDK" project-jdk-name="1.7" jdk-15="true" assert-keyword="true" languageLevel="JDK_1_6" version="2" name="ProjectRootManager">
+    <output url="file://$PROJECT_DIR$/out"></output>
+</component>
   <component name="masterDetails">
     <states>
       <state key="GlobalLibrariesConfigurable.UI">
@@ -10,7 +10,7 @@
           <splitter-proportions>
             <option name="proportions">
               <list>
-                <option value="0.2" />
+                <option value="0.2"></option>
               </list>
             </option>
           </splitter-proportions>
@@ -22,7 +22,7 @@
           <splitter-proportions>
             <option name="proportions">
               <list>
-                <option value="0.2" />
+                <option value="0.2"></option>
               </list>
             </option>
           </splitter-proportions>
@@ -34,7 +34,7 @@
           <splitter-proportions>
             <option name="proportions">
               <list>
-                <option value="0.2" />
+                <option value="0.2"></option>
               </list>
             </option>
           </splitter-proportions>
@@ -45,7 +45,7 @@
           <splitter-proportions>
             <option name="proportions">
               <list>
-                <option value="0.2" />
+                <option value="0.2"></option>
               </list>
             </option>
           </splitter-proportions>
@@ -54,4 +54,3 @@
     </states>
   </component>
 </project>
-

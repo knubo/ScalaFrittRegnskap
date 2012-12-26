@@ -7,5 +7,6 @@ project/plugins/lib_managed/
 project/plugins/src_managed/
 .classpath
 .project
+.idea*
 *~
 .cache
