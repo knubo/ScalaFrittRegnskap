@@ -1,3 +1,4 @@
+package no.frittregnskap
 
 import net.noerd.prequel.DatabaseConfig
 import net.noerd.prequel.SQLFormatterImplicits._
@@ -5,14 +6,18 @@ import net.noerd.prequel.ResultSetRowImplicits._
 import uk.co.bigbeeconsultants.http.request.RequestBody
 import uk.co.bigbeeconsultants.http._
 import uk.co.bigbeeconsultants.http.response.Status
+import uk.co.bigbeeconsultants.http.header.CookieJar
+import uk.co.bigbeeconsultants.http.header.Headers.createHeaders
 
 object FrittRegnskapCore {
+  var loggedInCookie = CookieJar()
 
   val database = DatabaseConfig(
     driver = "com.mysql.jdbc.Driver",
     jdbcURL = "jdbc:mysql://localhost:3306/fr",
     username = "root")
 
+    
   def addInstall = {
     database.transaction { tx =>
       tx.execute("delete from to_install")
@@ -40,21 +45,22 @@ object FrittRegnskapCore {
     val requestBody = RequestBody(Map("action" -> "secret", "secret" -> secret, "username" -> "knubo"))
 
     val httpClient = new HttpClient
-    val response = httpClient.post(url, Some(requestBody))
+    val response = httpClient.post(url, Some(requestBody), Nil, CookieJar())
 
     if (response.status != Status.S200_OK) {
-    	throw new RuntimeException("Did not get forwarded as expected. " + response.status+ " Body was:"+response.body)
+      throw new RuntimeException("Did not get forwarded as expected. " + response.status + " Body was:" + response.body)
     }
 
+    loggedInCookie = response.cookies.get
+    println(loggedInCookie)
+
     val checkBody = RequestBody(Map("action" -> "test"))
-    val responseCheck = httpClient.post(url, Some(checkBody))
+    val responseCheck = httpClient.post(url, Some(checkBody), Nil, loggedInCookie)
 
-    assert(responseCheck.body.equals("knubo"))
+    println("Auth after body:"+responseCheck.body)
+    assert(responseCheck.body.asString.contains("knubo"))
 
   }
 
-  def main(args: Array[String]): Unit = {
-    // addInstall
-    authBySecret
-  }
+ 
 }
